@@ -1,0 +1,12 @@
+[project]
+name = "ck-agents"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "ddgs>=9.16.1",
+    "openai>=3.46.0",
+    "openai-agents>=0.24.0",
+    "python-dotenv>=1.2.4",
+]
