@@ -71,7 +71,7 @@ def run_agent(task: str, max_steps: int = 6) -> str:
         resp = client.chat.completions.create(
             # 实际调用模型
             model=MODEL,
-            # messages 作为此 Agent 的全部记忆
+            # messages 作为此 Agent 的全部记忆（直接塞进上下文窗口的 短期记忆）
             # 包含系统提示词、用户问题、每一步的回复和每个工具的结果
             # 对话能记住上下文，就是靠每次请求都把这个 messages 列表整个发过去（模型本身是没有记忆的）
             messages=messages,
