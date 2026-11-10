@@ -33,14 +33,14 @@ AGENT_SYSTEM_PROMPT = """
 env_path = Path(__file__).resolve().parents[2] / ".env"
 load_dotenv(env_path)
 
-API_KEY = os.getenv("DASHSCOPE_API_KEY", "").strip()
-BASE_URL = os.getenv("DASHSCOPE_BASE_URL", "").strip()
-MODEL_ID = os.getenv("QWEN_MODEL", "qwen3.8-omni-flash")
+API_KEY = os.getenv("LLM_API_KEY", "").strip()
+BASE_URL = os.getenv("LLM_BASE_URL", "").strip()
+MODEL_ID = os.getenv("LLM_MODEL_ID", "qwen3.8-omni-flash")
 
 if not API_KEY:
-    raise ValueError(f"请在 {env_path} 中配置 DASHSCOPE_API_KEY，或设置同名环境变量")
+    raise ValueError(f"请在 {env_path} 中配置 LLM_API_KEY，或设置同名环境变量")
 if not BASE_URL:
-    raise ValueError(f"请在 {env_path} 中配置 DASHSCOPE_BASE_URL，或设置同名环境变量")
+    raise ValueError(f"请在 {env_path} 中配置 LLM_BASE_URL，或设置同名环境变量")
 
 # 定义模型
 llm = OpenAICompatibleClient(

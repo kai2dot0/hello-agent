@@ -84,18 +84,18 @@ cp .env.example demo-openai-sdk-multiagent/.env
 在对应的 `.env` 中填写 API Key，并按需调整模型和接口地址：
 
 ```dotenv
-DASHSCOPE_API_KEY="你的百炼 API Key"
-QWEN_MODEL="qwen3.8-omni-flash"
-DASHSCOPE_BASE_URL="https://maas.qianwenaiapi.com/compatible-mode/v1"
+LLM_API_KEY="你的百炼 API Key"
+LLM_MODEL_ID="qwen3.8-omni-flash"
+LLM_BASE_URL="https://maas.qianwenaiapi.com/compatible-mode/v1"
 ```
 
 工具循环与 SDK 示例读取**各自脚本同目录下的 `.env`**，不会自动加载根目录的 `.env`。记忆与多 Agent 示例同样优先读取本目录配置，但该文件不存在时会读取根目录 `.env`，不会合并两份文件。已有系统环境变量优先于文件配置，因此同名环境变量可能覆盖你刚修改的文件值。
 
 | 配置项 | 说明 |
 | --- | --- |
-| `DASHSCOPE_API_KEY` | 必填，需适用于所配置接口的地域和业务空间 |
-| `QWEN_MODEL` | 默认 `qwen3.8-omni-flash`，需支持工具调用；SDK 示例还使用 `reasoning.effort="low"` 设置 |
-| `DASHSCOPE_BASE_URL` | 手写循环、记忆与多 Agent 示例需配置；SDK 示例默认使用模板中的地址 |
+| `LLM_API_KEY` | 必填，需适用于所配置接口的地域和业务空间 |
+| `LLM_MODEL_ID` | 默认 `qwen3.8-omni-flash`，需支持工具调用；SDK 示例还使用 `reasoning.effort="low"` 设置 |
+| `LLM_BASE_URL` | 手写循环、记忆与多 Agent 示例需配置；SDK 示例默认使用模板中的地址 |
 
 无需额外设置 `OPENAI_API_KEY`。`.env` 已加入 Git 忽略规则，分享配置格式时使用不含真实 Key 的 `.env.example`。
 

@@ -34,19 +34,19 @@ load_dotenv(Path(__file__).with_name(".env"))
 # 1. 定义 qwen model
 def create_qwen_model() -> OpenAIChatCompletionsModel:
     """从环境变量创建百炼 Qwen 模型，使用 Chat Completions 兼容接口。"""
-    api_key = os.getenv("DASHSCOPE_API_KEY", "").strip()
+    api_key = os.getenv("LLM_API_KEY", "").strip()
     if not api_key:
         raise ValueError(
-            "请在项目根目录的 .env 中配置 DASHSCOPE_API_KEY，或设置同名环境变量"
+            "请在项目根目录的 .env 中配置 LLM_API_KEY，或设置同名环境变量"
         )
 
     return OpenAIChatCompletionsModel(
-        model=os.getenv("QWEN_MODEL", "qwen3.8-omni-flash"),
+        model=os.getenv("LLM_MODEL_ID", "qwen3.8-omni-flash"),
         openai_client=AsyncOpenAI(
             api_key=api_key,
             # 默认使用北京地域；其他地域或业务空间专属地址通过环境变量配置。
             base_url=os.getenv(
-                "DASHSCOPE_BASE_URL",
+                "LLM_BASE_URL",
                 "https://maas.qianwenaiapi.com/compatible-mode/v1",
             ),
         ),

@@ -10,7 +10,7 @@ from unittest.mock import Mock, patch
 
 from openai.types.chat import ChatCompletionMessage
 
-with patch.dict(os.environ, {"DASHSCOPE_API_KEY": "test-key", "DASHSCOPE_BASE_URL": "https://example.com/v1"}):
+with patch.dict(os.environ, {"LLM_API_KEY": "test-key", "LLM_BASE_URL": "https://example.com/v1"}):
     from datawhale.section1 import first_agent as agent
 
 

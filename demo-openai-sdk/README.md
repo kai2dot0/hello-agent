@@ -119,18 +119,18 @@ cp .env.example demo-openai-sdk/.env
 编辑 `demo-openai-sdk/.env`：
 
 ```dotenv
-DASHSCOPE_API_KEY="你的百炼 API Key"
-QWEN_MODEL="qwen3.8-omni-flash"
-DASHSCOPE_BASE_URL="https://maas.qianwenaiapi.com/compatible-mode/v1"
+LLM_API_KEY="你的百炼 API Key"
+LLM_MODEL_ID="qwen3.8-omni-flash"
+LLM_BASE_URL="https://maas.qianwenaiapi.com/compatible-mode/v1"
 ```
 
 脚本读取的是本目录的 `.env`，不会自动读取项目根目录的 `.env`；已有系统环境变量优先。`.env` 已由根目录的 Git 忽略规则排除。
 
 | 配置项 | 说明 |
 | --- | --- |
-| `DASHSCOPE_API_KEY` | 必填，需适用于所配置接口的地域和业务空间 |
-| `QWEN_MODEL` | 默认 `qwen3.8-omni-flash`，需支持工具调用和代码中的 `reasoning.effort="low"` 设置 |
-| `DASHSCOPE_BASE_URL` | 默认 `https://maas.qianwenaiapi.com/compatible-mode/v1` |
+| `LLM_API_KEY` | 必填，需适用于所配置接口的地域和业务空间 |
+| `LLM_MODEL_ID` | 默认 `qwen3.8-omni-flash`，需支持工具调用和代码中的 `reasoning.effort="low"` 设置 |
+| `LLM_BASE_URL` | 默认 `https://maas.qianwenaiapi.com/compatible-mode/v1` |
 
 示例使用 `AsyncOpenAI` 和 `OpenAIChatCompletionsModel` 连接 Qwen，无需额外设置 `OPENAI_API_KEY`。
 

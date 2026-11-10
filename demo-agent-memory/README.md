@@ -106,14 +106,14 @@ cp .env.example demo-agent-memory/.env
 编辑所使用的 `.env`，填入适用于接口地址的 Key：
 
 ```dotenv
-DASHSCOPE_API_KEY="你的百炼 API Key"
-QWEN_MODEL="qwen3.8-omni-flash"
-DASHSCOPE_BASE_URL="https://maas.qianwenaiapi.com/compatible-mode/v1"
+LLM_API_KEY="你的百炼 API Key"
+LLM_MODEL_ID="qwen3.8-omni-flash"
+LLM_BASE_URL="https://maas.qianwenaiapi.com/compatible-mode/v1"
 ```
 
 已有系统环境变量优先。文件选择规则是：存在 `demo-agent-memory/.env` 时读取该文件，否则读取根目录 `.env`；不会把两份文件合并。若示例目录文件存在但 Key 为空，需要补全该文件。
 
-`DASHSCOPE_API_KEY` 和 `DASHSCOPE_BASE_URL` 需要配置；`QWEN_MODEL` 省略时默认 `qwen3.8-omni-flash`。无需额外设置 `OPENAI_API_KEY`。
+`LLM_API_KEY` 和 `LLM_BASE_URL` 需要配置；`LLM_MODEL_ID` 省略时默认 `qwen3.8-omni-flash`。无需额外设置 `OPENAI_API_KEY`。
 
 ```bash
 uv run demo-agent-memory/demo_agent_memory.py

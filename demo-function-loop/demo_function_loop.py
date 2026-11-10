@@ -30,21 +30,21 @@ from tools.tools_manual import TOOLS, TOOLS_IMPL
 load_dotenv(Path(__file__).with_name(".env"))
 
 # 定义模型 API Key
-api_key = os.getenv("DASHSCOPE_API_KEY", "").strip()
+api_key = os.getenv("LLM_API_KEY", "").strip()
 if not api_key:
     raise ValueError(
-        "请在项目根目录的 .env 中配置 DASHSCOPE_API_KEY，或设置同名环境变量"
+        "请在项目根目录的 .env 中配置 LLM_API_KEY，或设置同名环境变量"
     )
 
 # 定义模型
 client = OpenAI(
     api_key=api_key,
     base_url=os.getenv(
-        "DASHSCOPE_BASE_URL",
+        "LLM_BASE_URL",
         "",
     ),
 )
-MODEL = os.getenv("QWEN_MODEL", "qwen3.8-omni-flash")
+MODEL = os.getenv("LLM_MODEL_ID", "qwen3.8-omni-flash")
 
 # 测试直接通过调用 API 来访问模型
 resp = client.chat.completions.create(

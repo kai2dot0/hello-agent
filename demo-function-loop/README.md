@@ -97,12 +97,12 @@ cp .env.example demo-function-loop/.env
 编辑 `demo-function-loop/.env`，填写适用于接口地址的 API Key：
 
 ```dotenv
-DASHSCOPE_API_KEY="你的百炼 API Key"
-QWEN_MODEL="qwen3.8-omni-flash"
-DASHSCOPE_BASE_URL="https://maas.qianwenaiapi.com/compatible-mode/v1"
+LLM_API_KEY="你的百炼 API Key"
+LLM_MODEL_ID="qwen3.8-omni-flash"
+LLM_BASE_URL="https://maas.qianwenaiapi.com/compatible-mode/v1"
 ```
 
-脚本读取的是本目录的 `.env`，不会自动读取项目根目录的 `.env`；已有系统环境变量优先。`DASHSCOPE_API_KEY` 和 `DASHSCOPE_BASE_URL` 需要配置，`QWEN_MODEL` 省略时使用 `qwen3.8-omni-flash`，模型需支持工具调用。`.env` 已由根目录的 Git 忽略规则排除。
+脚本读取的是本目录的 `.env`，不会自动读取项目根目录的 `.env`；已有系统环境变量优先。`LLM_API_KEY` 和 `LLM_BASE_URL` 需要配置，`LLM_MODEL_ID` 省略时使用 `qwen3.8-omni-flash`，模型需支持工具调用。`.env` 已由根目录的 Git 忽略规则排除。
 
 ## 运行
 

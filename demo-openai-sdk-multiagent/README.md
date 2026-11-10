@@ -116,12 +116,12 @@ cp .env.example demo-openai-sdk-multiagent/.env
 已有 `.env` 时直接编辑现有文件，填写：
 
 ```dotenv
-DASHSCOPE_API_KEY="你的百炼 API Key"
-QWEN_MODEL="qwen3.8-omni-flash"
-DASHSCOPE_BASE_URL="https://maas.qianwenaiapi.com/compatible-mode/v1"
+LLM_API_KEY="你的百炼 API Key"
+LLM_MODEL_ID="qwen3.8-omni-flash"
+LLM_BASE_URL="https://maas.qianwenaiapi.com/compatible-mode/v1"
 ```
 
-`DASHSCOPE_API_KEY` 和 `DASHSCOPE_BASE_URL` 需要配置；`QWEN_MODEL` 省略时默认 `qwen3.8-omni-flash`。无需设置 `OPENAI_API_KEY`。
+`LLM_API_KEY` 和 `LLM_BASE_URL` 需要配置；`LLM_MODEL_ID` 省略时默认 `qwen3.8-omni-flash`。无需设置 `OPENAI_API_KEY`。
 
 文件选择后只读取一份 `.env`，不会把示例目录与根目录配置合并；系统环境变量优先。如果本目录文件存在但 Key 为空，需要补全该文件。
 
