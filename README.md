@@ -1,8 +1,8 @@
 # hello-agents
 
-一个通过 Python 示例学习 AI Agent 的项目：先手写工具调用循环，理解模型如何使用外部能力；再使用 OpenAI Agents SDK，学习工具注册、角色分工和工作流编排；最后通过记忆示例理解偏好提取、持久化和上下文注入。
+一个通过 Python 示例学习 AI Agent 的项目：先手写工具调用循环，理解模型如何使用外部能力；再使用 OpenAI Agents SDK，学习工具注册、角色分工和工作流编排；通过记忆示例理解偏好提取、持久化和上下文注入，并用多角色写作流程进一步学习显式编排与数据传递。
 
-三个示例都通过阿里云百炼的 OpenAI 兼容接口调用 Qwen，共用根目录的依赖配置，各自拥有入口脚本和学习文档。
+四个示例都通过阿里云百炼的 OpenAI 兼容接口调用 Qwen，共用根目录的依赖配置，各自拥有入口脚本和学习文档。
 
 ## 推荐学习路线
 
@@ -11,8 +11,9 @@
 | 1 | [手写 Function Calling 循环](demo-function-loop/README.md) | 交互式计算、天气查询、文本文件读取 | 理解工具说明、函数执行、消息历史、结果回传和停止条件 |
 | 2 | [OpenAI Agents SDK](demo-openai-sdk/README.md) | 先生成研究报告，再交给质量检查员审核 | 对照手写步骤理解 SDK 封装，学习角色配置、上下文传递和流式事件 |
 | 3 | [Agent 长期记忆](demo-agent-memory/README.md) | 提取用户偏好，保存后用于下一次回答 | 区分消息历史与长期记忆，理解模型抽取、文件持久化和全量注入 |
+| 4 | [多 Agent 协作](demo-openai-sdk-multiagent/README.md) | 主管确认任务，研究员生成素材，写手撰文，评审打分 | 理解固定流水线、角色上下文和结果传递，并对照动态编排 |
 
-建议先用计算工具追踪一次完整调用，再进入 SDK 示例，随后学习跨次运行的记忆。三个目录的 README 都包含概念说明、代码阅读顺序、动手练习和学习检查题。
+建议先用计算工具追踪一次完整调用，再进入 SDK 示例，随后学习跨次运行的记忆和多角色协作。四个目录的 README 都包含概念说明、代码阅读顺序、动手练习和学习检查题。
 
 ## 通过这两个示例理解 Agent
 
@@ -47,6 +48,9 @@
 ├── demo-agent-memory/
 │   ├── README.md                     # 长期记忆学习教程
 │   └── demo_agent_memory.py           # 偏好提取、保存与注入
+├── demo-openai-sdk-multiagent/
+│   ├── README.md                     # 多角色协作学习教程
+│   └── demo_openai_sdk_multiagent.py  # 主管、研究员、写手与评审
 └── tools/
     ├── tools_manual.py               # 手写示例的工具说明与函数映射
     ├── calculator.py                 # 数学表达式计算
@@ -64,7 +68,7 @@
 uv sync
 ```
 
-三个示例使用同一套虚拟环境，无需分别安装依赖。
+四个示例使用同一套虚拟环境，无需分别安装依赖。
 
 ### 2. 配置要运行的示例
 
@@ -74,6 +78,7 @@ uv sync
 cp .env.example demo-function-loop/.env
 cp .env.example demo-openai-sdk/.env
 cp .env.example demo-agent-memory/.env
+cp .env.example demo-openai-sdk-multiagent/.env
 ```
 
 在对应的 `.env` 中填写 API Key，并按需调整模型和接口地址：
@@ -84,13 +89,13 @@ QWEN_MODEL="qwen3.8-omni-flash"
 DASHSCOPE_BASE_URL="https://maas.qianwenaiapi.com/compatible-mode/v1"
 ```
 
-工具循环与 SDK 示例读取**各自脚本同目录下的 `.env`**，不会自动加载根目录的 `.env`。记忆示例同样优先读取本目录配置，但该文件不存在时会读取根目录 `.env`，不会合并两份文件。已有系统环境变量优先于文件配置，因此同名环境变量可能覆盖你刚修改的文件值。
+工具循环与 SDK 示例读取**各自脚本同目录下的 `.env`**，不会自动加载根目录的 `.env`。记忆与多 Agent 示例同样优先读取本目录配置，但该文件不存在时会读取根目录 `.env`，不会合并两份文件。已有系统环境变量优先于文件配置，因此同名环境变量可能覆盖你刚修改的文件值。
 
 | 配置项 | 说明 |
 | --- | --- |
 | `DASHSCOPE_API_KEY` | 必填，需适用于所配置接口的地域和业务空间 |
 | `QWEN_MODEL` | 默认 `qwen3.8-omni-flash`，需支持工具调用；SDK 示例还使用 `reasoning.effort="low"` 设置 |
-| `DASHSCOPE_BASE_URL` | 手写循环与记忆示例需配置；SDK 示例默认使用模板中的地址 |
+| `DASHSCOPE_BASE_URL` | 手写循环、记忆与多 Agent 示例需配置；SDK 示例默认使用模板中的地址 |
 
 无需额外设置 `OPENAI_API_KEY`。`.env` 已加入 Git 忽略规则，分享配置格式时使用不含真实 Key 的 `.env.example`。
 
@@ -127,6 +132,16 @@ uv run demo-agent-memory/demo_agent_memory.py
 程序依次运行两次聊天，在回答后请求模型提取偏好，再写入 `memory.json`。该文件相对于执行命令的工作目录，按上述方式运行时位于项目根目录，并已加入 Git 忽略规则。
 
 每次新聊天会将全部已保存偏好加入系统提示词；跨次运行保留的是偏好，并非完整对话。一次正常完成的聊天会请求模型两次，分别用于回答和抽取。此例没有天气工具，默认天气问题用于观察偏好是否被使用。完整流程、实验方法与实现边界详见 [记忆教程](demo-agent-memory/README.md)。
+
+### 6. 运行多 Agent 协作示例
+
+```bash
+uv run demo-openai-sdk-multiagent/demo_openai_sdk_multiagent.py
+```
+
+默认任务为写一篇介绍 AI Agent 未来发展趋势的短文，程序依次请求主管、研究员、写手和评审，共四次模型请求。顺序由 Python 代码固定，评审结果打印后不会自动触发返工。
+
+该目录当前使用 `openai` 客户端和普通函数编排，没有使用 `openai-agents` 的 `Agent`、`Runner` 或 handoff。角色职责、上下文流向与后续实验详见 [多 Agent 协作教程](demo-openai-sdk-multiagent/README.md)。
 
 ## 两个 Python 包各自负责什么
 
