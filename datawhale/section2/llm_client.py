@@ -2,6 +2,14 @@
 Author: kaic
 Date: 2026-11-10 18:02
 LastEditors: kai2dot0 41042242+kai2dot0@users.noreply.github.com
+LastEditTime: 2026-11-10 18:07
+Copyright (c) 2026 by kaic, All Rights Reserved.
+"""
+
+"""
+Author: kaic
+Date: 2026-11-10 18:02
+LastEditors: kai2dot0 41042242+kai2dot0@users.noreply.github.com
 LastEditTime: 2026-11-10 18:02
 Copyright (c) 2026 by kaic, All Rights Reserved.
 """
@@ -40,9 +48,17 @@ class HelloAgentsLLM:
         if not all([self.model, apiKey, baseUrl]):
             raise ValueError("模型ID、API密钥和服务地址必须被提供或在.env文件中定义。")
 
-        self.client = OpenAI(api_key=apiKey, base_url=baseUrl, timeout=timeout)
+        self.client = OpenAI(
+            api_key=apiKey,
+            base_url=baseUrl,
+            timeout=timeout,
+        )
 
-    def think(self, messages: List[Dict[str, str]], temperature: float = 0) -> str:
+    def think(
+        self,
+        messages: List[Dict[str, str]],
+        temperature: float = 0,
+    ) -> str:
         """
         调用大语言模型进行思考，并返回其响应。
         """
