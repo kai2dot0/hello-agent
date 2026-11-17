@@ -16,3 +16,8 @@ wheels/
 
 # Local agent memory generated while running demos.
 memory.json
+
+# Generated documents, memory databases and reports from the section3 assistant.
+datawhale/section3/memory_data/
+datawhale/section3/knowledge_base/
+datawhale/section3/learning_reports/
